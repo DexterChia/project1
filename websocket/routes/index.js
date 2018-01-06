@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var model = require('../models');  //put path const v = require("../sad/sdsds");
+var Sequelize = require('sequelize'); 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -37,6 +40,7 @@ codes.forEach(function(key) {
 
   	//console.log(url);
     request(url, function(err, resp, body) {
+    	if (err) return console.log(err);
 	        $ = cheerio.load(body);
 	        //console.log(body);
 	        $('h2#price').each(function(day) {
@@ -54,14 +58,16 @@ codes.forEach(function(key) {
 });
 
 
-var url2 = 'https://www.klsescreener.com/v2/stocks/view/' + key.code;
+var url2 = 'http://www.bursamalaysia.com/market/listed-companies/list-of-companies/main-market/'；
 
   	
+  	bm_equities_prices_table
   	//console.log(url);
     request(url, function(err, resp, body) {
 	        $ = cheerio.load(body);
 	        //console.log(body);
-	        $('h2#price').each(function(day) {
+
+	        $('#bm_equities_prices_table .bm_left').each(function(day) {
 	        	console.log("--->"+key.name+", Current Price:"+$(this).text());
 	            $(this).find('div').each(function() {
 	            	console.log("--->2");
@@ -71,6 +77,8 @@ var url2 = 'https://www.klsescreener.com/v2/stocks/view/' + key.code;
 	                    console.log(pool + ',' + days[day] + ',' + event[0] + ',' + event[1]);*/
 	            });
 	        });
+	        	
+
     	});
 
 
